@@ -1,0 +1,37 @@
+{
+  "uuid": "ed70b15c-3c48-4828-8e8c-e39a28efb38d",
+  "shortName": "Tutorial-3-3",
+  "longName": "Tutorial-3-3",
+  "companyName": "Pebble",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "KEY_TEMPERATURE": 0,
+    "KEY_CONDITIONS": 1
+  },
+  "capabilities": [
+    "location"
+  ],
+  "resources": {
+    "media": [
+      {
+        "type":"font",
+        "name":"FONT_PERFECT_DOS_48",
+        "file":"perfect-dos-vga.ttf"
+      },
+      {
+        "type":"font",
+        "name":"FONT_PERFECT_DOS_20",
+        "file":"perfect-dos-vga.ttf"
+      },
+      {
+        "type":"png",
+        "name":"IMAGE_BACKGROUND",
+        "file":"background.png"
+      }
+    ]
+  }
+}
