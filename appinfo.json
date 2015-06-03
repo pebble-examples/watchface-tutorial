@@ -18,20 +18,25 @@
   "resources": {
     "media": [
       {
-        "type":"font",
-        "name":"FONT_PERFECT_DOS_48",
-        "file":"perfect-dos-vga.ttf"
+        "type": "font",
+        "name": "FONT_PERFECT_DOS_48",
+        "file": "perfect-dos-vga.ttf"
       },
       {
-        "type":"font",
-        "name":"FONT_PERFECT_DOS_20",
-        "file":"perfect-dos-vga.ttf"
+        "type": "font",
+        "name": "FONT_PERFECT_DOS_20",
+        "file": "perfect-dos-vga.ttf"
       },
       {
-        "type":"png",
-        "name":"IMAGE_BACKGROUND",
-        "file":"background.png"
+        "type": "png",
+        "name": "IMAGE_BACKGROUND",
+        "file": "background.png"
       }
     ]
-  }
+  },
+  "targetPlatforms": [
+    "aplite",
+    "basalt"
+  ],
+  "sdkVersion": "3"
 }
