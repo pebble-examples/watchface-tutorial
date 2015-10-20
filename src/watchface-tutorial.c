@@ -46,7 +46,6 @@ static void main_window_load(Window *window) {
   s_background_layer = bitmap_layer_create(grect_inset(bounds, bitmap_insets));
 #endif
 
-  // Set the GBitmap to the BitmapLayer and add to the Window
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
   
@@ -69,12 +68,18 @@ static void main_window_load(Window *window) {
   // Apply to TextLayer
   text_layer_set_font(s_time_layer, s_time_font);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
- 
-  // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
   
   // Create temperature Layer
-  s_weather_layer = text_layer_create(GRect(0, 130, 144, 25));
+#if defined(PBL_SDK_2)
+  s_weather_layer = text_layer_create(GRect(0, 120, 144, 25));
+#elif defined(PBL_SDK_3)
+  const int weather_text_margin_top = 50;
+  const GEdgeInsets weather_insets = {
+    .top = bounds.size.h - weather_text_margin_top };
+
+  s_weather_layer = text_layer_create(grect_inset(bounds, weather_insets));
+#endif
   text_layer_set_background_color(s_weather_layer, GColorClear);
   text_layer_set_text_color(s_weather_layer, GColorWhite);
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentCenter);
@@ -90,21 +95,14 @@ static void main_window_load(Window *window) {
 }
  
 static void main_window_unload(Window *window) {
-  // Unload GFont
   fonts_unload_custom_font(s_time_font);
+  fonts_unload_custom_font(s_weather_font);
   
-  // Destroy GBitmap
   gbitmap_destroy(s_background_bitmap);
  
-  // Destroy BitmapLayer
   bitmap_layer_destroy(s_background_layer);
-  
-  // Destroy TextLayer
   text_layer_destroy(s_time_layer);
-  
-  // Destroy weather elements
   text_layer_destroy(s_weather_layer);
-  fonts_unload_custom_font(s_weather_font);
 }
  
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -172,17 +170,11 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
 static void init() {
   // Create main Window element and assign to pointer
   s_main_window = window_create();
-
-  // Set the background color
   window_set_background_color(s_main_window, GColorBlack);
- 
-  // Set handlers to manage the elements inside the Window
   window_set_window_handlers(s_main_window, (WindowHandlers) {
     .load = main_window_load,
     .unload = main_window_unload
   });
- 
-  // Show the Window on the watch, with animated=true
   window_stack_push(s_main_window, true);
   
   // Register with TickTimerService
