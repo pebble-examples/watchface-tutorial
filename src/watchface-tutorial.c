@@ -34,29 +34,13 @@ static void main_window_load(Window *window) {
   s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACKGROUND);
 
   // Create BitmapLayer to display the GBitmap
-#if defined(PBL_SDK_2)
   s_background_layer = bitmap_layer_create(bounds);
-#elif defined(PBL_SDK_3)
-  GRect bitmap_bounds = gbitmap_get_bounds(s_background_bitmap);
-
-  // Inset the window bounds to center the image
-  const GEdgeInsets bitmap_insets = GEdgeInsets(
-    (bounds.size.h - bitmap_bounds.size.h) / 2,
-    (bounds.size.w - bitmap_bounds.size.w) / 2);
-  s_background_layer = bitmap_layer_create(grect_inset(bounds, bitmap_insets));
-#endif
-
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
   
   // Create time TextLayer
-#if defined(PBL_SDK_2)
-  s_time_layer = text_layer_create(GRect(5, 52, 139, 50));
-#elif defined(PBL_SDK_3)
-  const int text_height = 65;
-  const GEdgeInsets text_insets = GEdgeInsets((bounds.size.h - text_height) / 2, 0);
-  s_time_layer = text_layer_create(grect_inset(bounds, text_insets));
-#endif
+  s_time_layer = text_layer_create(
+    GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorBlack);
   text_layer_set_text(s_time_layer, "00:00");
@@ -70,15 +54,8 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
   
   // Create temperature Layer
-#if defined(PBL_SDK_2)
-  s_weather_layer = text_layer_create(GRect(0, 120, 144, 25));
-#elif defined(PBL_SDK_3)
-  const int weather_text_margin_top = 50;
-  const GEdgeInsets weather_insets = {
-    .top = bounds.size.h - weather_text_margin_top };
-
-  s_weather_layer = text_layer_create(grect_inset(bounds, weather_insets));
-#endif
+  s_weather_layer = text_layer_create(
+    GRect(0, PBL_IF_ROUND_ELSE(125, 120), bounds.size.w, 25));
   text_layer_set_background_color(s_weather_layer, GColorClear);
   text_layer_set_text_color(s_weather_layer, GColorWhite);
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentCenter);
