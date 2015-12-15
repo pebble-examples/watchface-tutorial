@@ -28,7 +28,7 @@
         "file": "perfect-dos-vga.ttf"
       },
       {
-        "type": "png",
+        "type": "bitmap",
         "name": "IMAGE_BACKGROUND",
         "file": "background.png"
       }
@@ -37,7 +37,6 @@
   "targetPlatforms": [
     "aplite",
     "basalt",
-
     "chalk"
   ],
   "sdkVersion": "3"
