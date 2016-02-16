@@ -7,7 +7,7 @@ This is the result of all three parts and is a customized watchface with weather
 **Important**
 
 To obtain weather information, you must supply a value for `myAPIKey` in 
-`src/pebble-js-app.js`. These are freely available from
+`src/js/app.js`. These are freely available from
 [OpenWeatherMap.org](https://openweathermap.org/appid).
 
 ![screenshot](screenshots/screenshot.png)
