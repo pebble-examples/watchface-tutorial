@@ -5,6 +5,7 @@
   "companyName": "Pebble",
   "versionCode": 1,
   "versionLabel": "1.0",
+  "enableMultiJS": true,
   "watchapp": {
     "watchface": true
   },
